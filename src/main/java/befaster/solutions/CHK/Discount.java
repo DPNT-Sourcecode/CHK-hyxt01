@@ -4,10 +4,12 @@ import java.util.Optional;
 
 public class Discount {
 
+    private final char sku;
     private final int quantity;
     private final int price;
 
-    public Discount(int quantity, int price) {
+    public Discount(char sku, int quantity, int price) {
+        this.sku = sku;
         this.quantity = quantity;
         this.price = price;
     }
@@ -25,4 +27,5 @@ public class Discount {
     }
 
 }
+
 

@@ -13,7 +13,7 @@ public class CheckoutSolution {
     private static final String VALID_SKU_REGEX = "[A-D]*";
 
     private final Map<String, Integer> skuPriceMap;
-    private final List<Discount> skuDiscountMap;
+    private final List<Discount> discountList;
 
     public CheckoutSolution() {
         skuPriceMap = Map.of(
@@ -23,10 +23,10 @@ public class CheckoutSolution {
             "D", 15
         );
 
-        skuDiscountMap = Map.of(
-            "A", new Discount(3, 130),
-                "A", new Discount(5, 200),
-            "B", new Discount(2, 45)
+        discountList = List.of(
+                new Discount('A', 3, 130),
+                new Discount('A', 5, 200),
+                new Discount('B', 2, 45)
         );
     }
 
@@ -60,7 +60,7 @@ public class CheckoutSolution {
         String skuStr = String.valueOf(sku);
         int price = skuPriceMap.get(skuStr);
 
-        Discount discount = skuDiscountMap.get(skuStr);
+        Discount discount = discountList
         if (discount != null) {
             Optional<Integer> discountedPrice = discount.apply(count, price);
             if (discountedPrice.isPresent()) {
@@ -70,3 +70,4 @@ public class CheckoutSolution {
         return count * price;
     }
 }
+

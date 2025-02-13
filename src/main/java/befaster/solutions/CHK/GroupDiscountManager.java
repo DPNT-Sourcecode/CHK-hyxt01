@@ -18,32 +18,30 @@ public class GroupDiscountManager {
     Map<Character, Integer> getNonApplicableSkus() {
         return nonApplicableSkus;
     }
-//
-//    private void applyGroupDiscounts(Map<Character, Integer> skuCountMap) {
-//        for (Discount groupDiscount : groupDiscountList) {
-//            List<Character> skuInGroup = new ArrayList<>();
-//            int skuGroupCount = 0;
-//            for (char sku : groupDiscount.getSkuList()) {
-//                int skuItemGroup = skuCountMap.getOrDefault(sku, 0);
-//                if (skuItemGroup == 0) continue;
-//
-//                skuGroupCount += skuItemGroup;
-//                for (int i = 0; i < skuItemGroup; i++) {
-//                    skuInGroup.add(sku);
-//                }
-//            }
-//
-//            Optional<Integer> valueWithDiscount = groupDiscount.apply(skuGroupCount);
-//            if (valueWithDiscount.isPresent()) {
-//                groupedDiscountValue += valueWithDiscount.get();
-//
-//                for (char sku : skuInGroup) {
-//                    int remainingCount = skuCountMap.getOrDefault(sku, 0) - 1;
-//                    if (remainingCount >= 0) this.nonApplicableSkus.put(sku, remainingCount);
-//                }
-//            }
-//        }
-//    }
+
+    private void applyGroupDiscounts(Map<Character, Integer> skuCountMap) {
+        List<Character> skuInGroup = new ArrayList<>();
+        int skuGroupCount = 0;
+        for (char sku : groupDiscountItems.getSkuList()) {
+            int skuItemGroup = skuCountMap.getOrDefault(sku, 0);
+            if (skuItemGroup == 0) continue;
+
+            skuGroupCount += skuItemGroup;
+            for (int i = 0; i < skuItemGroup; i++) {
+                skuInGroup.add(sku);
+            }
+        }
+
+        Optional<Integer> valueWithDiscount = groupDiscount.apply(skuGroupCount);
+        if (valueWithDiscount.isPresent()) {
+            groupedDiscountValue += valueWithDiscount.get();
+
+            for (char sku : skuInGroup) {
+                int remainingCount = skuCountMap.getOrDefault(sku, 0) - 1;
+                if (remainingCount >= 0) this.nonApplicableSkus.put(sku, remainingCount);
+            }
+        }
+    }
 
     private void apply(Map<Character, Integer> skuCountMap) {
         List<Character> skuInGroup = getGroupItems(skuCountMap);
@@ -68,3 +66,4 @@ public class GroupDiscountManager {
         return skuInGroup;
     }
 }
+

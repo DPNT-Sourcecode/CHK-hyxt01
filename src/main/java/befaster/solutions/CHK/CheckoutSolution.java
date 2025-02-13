@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class CheckoutSolution {
 
-    private static final int INVALID_SKU = -1;
-    private static final int EMPTY_CART = 0;
+    private static final int INVALID_CHECKOUT = -1;
+    private static final int EMPTY_CHECKOUT = 0;
     private static final String VALID_SKU_REGEX = "[A-Z]*";
 
     private final Map<String, Integer> skuPriceMap;
@@ -20,12 +20,12 @@ public class CheckoutSolution {
     public Integer checkout(String skus) {
         boolean isInvalid = skus == null || !skus.matches(VALID_SKU_REGEX);
         if (isInvalid) {
-            return INVALID_SKU;
+            return INVALID_CHECKOUT;
         }
 
         boolean isEmpty = skus.isEmpty();
         if (isEmpty) {
-            return EMPTY_CART;
+            return EMPTY_CHECKOUT;
         }
 
         Map<Character, Integer> skuCountMap = new HashMap<>();

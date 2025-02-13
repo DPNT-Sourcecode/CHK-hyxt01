@@ -10,25 +10,28 @@ public class GroupDiscountManager {
     );
 
     public int value;
-    public List<Character> remainingItems;
+    public List<Character> remainingSkuList;
 
-    public int apply(List<Character> skuList) {
-        List<Character> remainingItems = skuList;
-
-        for (Discount discount : discountList) {
-            int skuGroupCount = 0;
-            for (char sku : list) {
-                if (discount.isApplicable(sku)) {
-                    skuGroupCount++;
-                    remainingItems.remove(sku);
-                }
-            }
-            Optional<Integer> valueWithDiscount = discount.apply(skuGroupCount);
-            if (valueWithDiscount.isPresent()) {
-                value += valueWithDiscount.get();
-            }
-        }
+    public int apply(String skuList) {
+//        remainingSkuList = List.of(skuList.toCharArray());
+//
+//        for (Discount discount : discountList) {
+//            int skuGroupCount = 0;
+//            for (char sku : skuList.toCharArray()) {
+//                if (discount.isApplicable(sku)) {
+//                    skuGroupCount++;
+//                    remainingSkuList.remove(sku);
+//                }
+//            }
+//            Optional<Integer> valueWithDiscount = discount.apply(skuGroupCount);
+//            if (valueWithDiscount.isPresent()) {
+//                value += valueWithDiscount.get();
+//            } else {
+//                remainingSkuList = skuList;
+//            }
+//        }
         return -1;
     }
 }
+
 

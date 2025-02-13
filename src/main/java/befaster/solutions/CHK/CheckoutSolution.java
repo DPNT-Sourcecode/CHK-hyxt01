@@ -28,7 +28,7 @@ public class CheckoutSolution {
             return EMPTY_CART;
         }
 
-        new GroupDiscountManager().apply(skus);
+        int value = new GroupDiscountManager().apply(skus);
 
         Map<Character, Integer> skuCountMap = new HashMap<>();
         for (char sku : skus.toCharArray()) {

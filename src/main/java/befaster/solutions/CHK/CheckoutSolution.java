@@ -54,7 +54,10 @@ public class CheckoutSolution {
 
         Discount discount = skuDiscountMap.get(skuStr);
         if (discount != null) {
-            return discount.apply(count).ifPresent(value -> value).orElse(count * price);
+            Optional<Integer> discountedPrice = discount.apply(count, price);
+            if (discountedPrice.isPresent()) {
+                return discountedPrice.get();
+            }
         }
         return count * price;
     }
@@ -68,7 +71,7 @@ public class CheckoutSolution {
             this.price = price;
         }
 
-        public Optional<Integer> apply(int count) {
+        public Optional<Integer> apply(int count, int unitPrice) {
             if (count < quantity) {
                 return Optional.empty();
             }
@@ -76,8 +79,8 @@ public class CheckoutSolution {
             int discountCount = count / quantity;
             int remainingCount = count % quantity;
 
-            Integer value = discountCount * price + remainingCount * price;
-            return Optional.of(value);
+            Integer totalPrice = (discountCount * price) + (remainingCount * unitPrice);
+            return Optional.of(totalPrice);
         }
     }
 }

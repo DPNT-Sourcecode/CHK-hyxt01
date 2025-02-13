@@ -92,5 +92,7 @@ class CheckoutSolutionTest {
         assertThat(checkoutSolution.checkout("STXSTXSTX"), equalTo(135));
         assertThat(checkoutSolution.checkout("STXSTXSTXSTX"), equalTo(180));
         assertThat(checkoutSolution.checkout("STXSTXSTXSTXSTX"), equalTo(225));
+        assertThat(checkoutSolution.checkout("STXSTXSTXSTXSTXX"), equalTo(242));
+        assertThat(checkoutSolution.checkout("UUUUSTX"), equalTo(165));
     }
 }

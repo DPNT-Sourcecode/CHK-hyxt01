@@ -20,7 +20,7 @@ public class Discount {
         return this.sku == sku;
     }
 
-    public Optional<Integer> apply(int count, int unitPrice) {
+    public Optional<Integer> apply(int count) {
         if (count < quantity) {
             return Optional.empty();
         }

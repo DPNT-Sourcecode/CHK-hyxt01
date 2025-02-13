@@ -13,8 +13,7 @@ public class CheckoutSolution {
     private static final String VALID_SKU_REGEX = "[A-E]*";
 
     private final Map<String, Integer> skuPriceMap;
-    private final List<Discount> discountList;
-    private final BuyXGetYFreeOffer freeBWithE;
+    private final DiscountManager discountManager;
 
     public CheckoutSolution() {
         skuPriceMap = Map.of(
@@ -24,13 +23,7 @@ public class CheckoutSolution {
             "D", 15,
             "E", 40
         );
-
-        discountList = List.of(
-                new Discount('A', 5, 200),
-                new Discount('A', 3, 130),
-                new Discount('B', 2, 45)
-        );
-        freeBWithE = new BuyXGetYFreeOffer('E', 2, 'B');
+        discountManager = new DiscountManager();
     }
 
     public Integer checkout(String skus) {
@@ -49,7 +42,7 @@ public class CheckoutSolution {
             skuCountMap.put(sku, skuCountMap.getOrDefault(sku, 0) + 1);
         }
 
-        freeBWithE.apply(skuCountMap);
+        discountManager.applyFreeItemOffers(skuCountMap);
 
         int total = 0;
         for (Map.Entry<Character, Integer> entry : skuCountMap.entrySet()) {
@@ -65,19 +58,7 @@ public class CheckoutSolution {
         String skuStr = String.valueOf(sku);
         int unitPrice = skuPriceMap.get(skuStr);
 
-        int value = 0;
-        for (Discount discount : discountList) {
-            if (discount.isApplicable(sku)) {
-                Optional<Integer> valueWithDiscount = discount.apply(count, unitPrice);
-                if (valueWithDiscount.isPresent()) {
-                    value += valueWithDiscount.get();
-                    count = discount.getRemainingCount();
-                }
-            }
-        }
-
-        value += count * unitPrice;
-        return value;
+        return discountManager.calculateValueWithDiscount(sku, count, unitPrice);
     }
 }
 

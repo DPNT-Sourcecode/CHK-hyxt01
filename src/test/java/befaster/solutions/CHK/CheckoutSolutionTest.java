@@ -51,14 +51,14 @@ class CheckoutSolutionTest {
         assertThat(checkoutSolution.checkout("EEEBB"), equalTo(150));
         assertThat(checkoutSolution.checkout("EEBB"), equalTo(110));
 
-        assertThat(checkoutSolution.checkout("AAAAA"), equalTo(200));//230
-        assertThat(checkoutSolution.checkout("AAAAAA"), equalTo(250));//260
-        assertThat(checkoutSolution.checkout("AAAAAAA"), equalTo(300));//310
+        assertThat(checkoutSolution.checkout("AAAAA"), equalTo(200));
+        assertThat(checkoutSolution.checkout("AAAAAA"), equalTo(250));
+        assertThat(checkoutSolution.checkout("AAAAAAA"), equalTo(300));
 
-        assertThat(checkoutSolution.checkout("AAA"), equalTo(130));//150
-        assertThat(checkoutSolution.checkout("AAAA"), equalTo(180));//200
+        assertThat(checkoutSolution.checkout("AAA"), equalTo(130));
+        assertThat(checkoutSolution.checkout("AAAA"), equalTo(180));
 
-        assertThat(checkoutSolution.checkout("AAAAAAAA"), equalTo(330));//350
-        assertThat(checkoutSolution.checkout("AAAAAAAAA"), equalTo(380));//400
+        assertThat(checkoutSolution.checkout("AAAAAAAA"), equalTo(330));
+        assertThat(checkoutSolution.checkout("AAAAAAAAA"), equalTo(380));
     }
 }

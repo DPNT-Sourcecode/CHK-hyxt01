@@ -15,6 +15,11 @@ class CheckoutSolutionTest {
     }
 
     @Test
+    public void testEmpty() {
+        assertThat(checkoutSolution.checkout(""), equalTo(0));
+    }
+
+    @Test
     public void testInvalid() {
         assertThat(checkoutSolution.checkout("123"), equalTo(-1));
         assertThat(checkoutSolution.checkout("1234"), equalTo(-1));
@@ -37,5 +42,12 @@ class CheckoutSolutionTest {
         assertThat(checkoutSolution.checkout("AAAA"), equalTo(180));
         assertThat(checkoutSolution.checkout("BBBB"), equalTo(90));
         assertThat(checkoutSolution.checkout("BBB"), equalTo(75));
+    }
+
+    @Test
+    public void testFreeBWithE() {
+        assertThat(checkoutSolution.checkout("EEB"), equalTo(80));
+        assertThat(checkoutSolution.checkout("EEEB"), equalTo(120));
+        assertThat(checkoutSolution.checkout("EEEBB"), equalTo(125));
     }
 }

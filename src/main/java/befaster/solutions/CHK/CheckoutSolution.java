@@ -14,6 +14,7 @@ public class CheckoutSolution {
 
     private final Map<String, Integer> skuPriceMap;
     private final List<Discount> discountList;
+    private final BuyXGetYFreeOffer freeBWithE;
 
     public CheckoutSolution() {
         skuPriceMap = Map.of(
@@ -28,6 +29,7 @@ public class CheckoutSolution {
                 new Discount('A', 5, 200),
                 new Discount('B', 2, 45)
         );
+        freeBWithE = new BuyXGetYFreeOffer('E', 2, 'B');
     }
 
     public Integer checkout(String skus) {
@@ -45,6 +47,8 @@ public class CheckoutSolution {
         for (char sku : skus.toCharArray()) {
             skuCountMap.put(sku, skuCountMap.getOrDefault(sku, 0) + 1);
         }
+
+        freeBWithE.apply(skuCountMap);
 
         int total = 0;
         for (Map.Entry<Character, Integer> entry : skuCountMap.entrySet()) {
@@ -66,7 +70,7 @@ public class CheckoutSolution {
                         discount.isApplicable(sku)
                 ).findFirst();
 
-        
+
         if (applicableDiscount.isPresent()) {
             Optional<Integer> discountedPrice = applicableDiscount.get().apply(count, price);
             if (discountedPrice.isPresent()) {

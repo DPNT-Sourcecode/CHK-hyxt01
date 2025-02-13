@@ -49,7 +49,6 @@ public class DiscountManager {
             Optional<Integer> valueWithDiscount = groupDiscount.apply(skuGroupCount);
             if (valueWithDiscount.isPresent()) {
                 value += valueWithDiscount.get();
-                skuGroupCount = groupDiscount.getRemainingCount();
                 for (char sku : groupDiscount.getSkuList()) {
                     skuCountMap.put(sku, skuCountMap.getOrDefault(sku, 0) - skuGroupCount);
                 }
@@ -76,4 +75,5 @@ public class DiscountManager {
         return value;
     }
 }
+
 

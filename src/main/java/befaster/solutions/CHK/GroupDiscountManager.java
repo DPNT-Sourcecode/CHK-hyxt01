@@ -55,6 +55,8 @@ public class GroupDiscountManager {
             }
         }
 
+        itemsInGroup.sort(Comparator.comparingInt(prices::get).reversed());
+
         while (itemsInGroup.size() >= groupDiscountItems.getRequiredQuantity()) {
             groupedDiscountValue += 45;
             itemsInGroup.subList(0, 3).forEach(item -> {
@@ -80,9 +82,3 @@ public class GroupDiscountManager {
         return skuInGroup;
     }
 }
-
-
-
-
-
-

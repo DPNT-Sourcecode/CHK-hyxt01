@@ -1,6 +1,6 @@
 package befaster.solutions.CHK;
 
-public class Item {
+public class GroupItem {
 
     private final char sku;
     private final int unitPrice;
@@ -8,7 +8,7 @@ public class Item {
     private int finalPrice;
     private boolean belongsToGroupPromotion = false;
 
-    public Item(char sku, int price) {
+    public GroupItem(char sku, int price) {
         this.sku = sku;
         this.unitPrice = price;
         this.finalPrice = price;
@@ -30,4 +30,3 @@ public class Item {
         return finalPrice;
     }
 }
-

@@ -51,4 +51,3 @@ public class Discount {
         return requiredQuantity;
     }
 }
-

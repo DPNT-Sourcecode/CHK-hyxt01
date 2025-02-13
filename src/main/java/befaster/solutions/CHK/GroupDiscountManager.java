@@ -33,5 +33,3 @@ public class GroupDiscountManager {
         return -1;
     }
 }
-
-

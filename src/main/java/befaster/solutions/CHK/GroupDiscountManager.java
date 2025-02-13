@@ -55,14 +55,15 @@ public class GroupDiscountManager {
             groupedDiscountValue += 45;
             itemsInGroup.subList(0, 3).forEach(item -> {
                 int remainingCount = skuCountMap.getOrDefault(item, 0) - 1;
-                if (remainingCount >= 0) this.nonApplicableSkus.put(item, remainingCount);
+                if (remainingCount > 0) this.nonApplicableSkus.put(item, remainingCount);
+                if (remainingCount == 0) this.nonApplicableSkus.remove(item);
             });
             itemsInGroup.subList(0, 3).clear();
         }
-        for (char item : itemsInGroup) {
-            int remainingCount = skuCountMap.getOrDefault(item, 0) + 1;
-            if (remainingCount >= 0) this.nonApplicableSkus.put(item, remainingCount);
-        }
+//        for (char item : itemsInGroup) {
+//            int remainingCount = skuCountMap.getOrDefault(item, 0) + 1;
+//            if (remainingCount >= 0) this.nonApplicableSkus.put(item, remainingCount);
+//        }
     }
 
     private List<Character> getGroupItems(Map<Character, Integer> skuCountMap) {
@@ -75,5 +76,6 @@ public class GroupDiscountManager {
         return skuInGroup;
     }
 }
+
 
 

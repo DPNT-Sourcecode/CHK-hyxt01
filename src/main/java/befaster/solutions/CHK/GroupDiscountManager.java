@@ -14,6 +14,7 @@ public class GroupDiscountManager {
     public int groupedDiscountValue = 0;
 
     public GroupDiscountManager(Map<Character, Integer> skuCountMap) {
+        this.groupedDiscountValue = 0;
         this.nonApplicableSkus = skuCountMap;
         apply(skuCountMap);
     }
@@ -79,6 +80,7 @@ public class GroupDiscountManager {
         return skuInGroup;
     }
 }
+
 
 
 

@@ -60,9 +60,15 @@ public class CheckoutSolution {
         String skuStr = String.valueOf(sku);
         int price = skuPriceMap.get(skuStr);
 
-        Discount discount = discountList
-        if (discount != null) {
-            Optional<Integer> discountedPrice = discount.apply(count, price);
+        Optional<Discount> applicableDiscount = discountList.stream()
+                .filter(
+                        discount ->
+                        discount.isApplicable(sku)
+                ).findFirst();
+
+        
+        if (applicableDiscount.isPresent()) {
+            Optional<Integer> discountedPrice = applicableDiscount.get().apply(count, price);
             if (discountedPrice.isPresent()) {
                 return discountedPrice.get();
             }
@@ -70,4 +76,5 @@ public class CheckoutSolution {
         return count * price;
     }
 }
+
 

@@ -14,6 +14,10 @@ public class Discount {
         this.price = price;
     }
 
+    public Boolean isApplicable(char sku) {
+        return this.sku == sku;
+    }
+
     public Optional<Integer> apply(int count, int unitPrice) {
         if (count < quantity) {
             return Optional.empty();
@@ -27,5 +31,6 @@ public class Discount {
     }
 
 }
+
 
 

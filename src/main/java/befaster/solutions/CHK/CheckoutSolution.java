@@ -26,8 +26,8 @@ public class CheckoutSolution {
         );
 
         discountList = List.of(
-                new Discount('A', 3, 130),
                 new Discount('A', 5, 200),
+                new Discount('A', 3, 130),
                 new Discount('B', 2, 45)
         );
         freeBWithE = new BuyXGetYFreeOffer('E', 2, 'B');

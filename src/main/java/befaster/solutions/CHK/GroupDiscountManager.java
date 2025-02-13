@@ -4,7 +4,7 @@ import java.util.*;
 
 public class GroupDiscountManager {
 
-    private static final Set<Character> groupDiscountItems = Set.of('S', 'T', 'X', 'Y', 'Z');
+    private static final Discount groupDiscountItems = new Discount(List.of('S', 'T', 'X', 'Y', 'Z'), 3, 45);
 
 
     public Map<Character, Integer> nonApplicableSkus;
@@ -47,12 +47,19 @@ public class GroupDiscountManager {
 
     private void apply(Map<Character, Integer> skuCountMap) {
         List<Character> itemsInGroup = getGroupItems(skuCountMap);
-        int groupCount = itemsInGroup.size();
+        int total = 0;
+        while (itemsInGroup.size() >= groupDiscountItems.getRequiredQuantity()) {
+            total += 45;
+            itemsInGroup.subList(0, 3).clear();
+        }
+        for (char item : itemsInGroup) {
+            total += prices.get(item);
+        }
     }
 
     private List<Character> getGroupItems(Map<Character, Integer> skuCountMap) {
         List<Character> skuInGroup = new ArrayList<>();
-        for (char item : groupDiscountItems) {
+        for (char item : groupDiscountItems.getSkuList()) {
             for (int i = 0; i < skuCountMap.getOrDefault(item, 0); i++) {
                 skuInGroup.add(item);
             }
@@ -60,6 +67,7 @@ public class GroupDiscountManager {
         return skuInGroup;
     }
 }
+
 
 
 

@@ -1,10 +1,7 @@
 package befaster.solutions.CHK;
 
-import javax.swing.text.html.Option;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class CheckoutSolution {
 
@@ -36,7 +33,7 @@ public class CheckoutSolution {
             skuCountMap.put(sku, skuCountMap.getOrDefault(sku, 0) + 1);
         }
 
-        discountManager.applyFreeItemOffers(skuCountMap);
+        discountManager.dropFreeItemOffers(skuCountMap);
 
         int total = 0;
         for (Map.Entry<Character, Integer> entry : skuCountMap.entrySet()) {

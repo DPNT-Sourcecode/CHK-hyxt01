@@ -27,6 +27,8 @@ public class Discount {
         return this.sku.contains(sku);
     }
 
+    public Boolean isGroup
+
     public Optional<Integer> apply(int count) {
         if (count < quantity) {
             return Optional.empty();
@@ -43,3 +45,4 @@ public class Discount {
         return remainingCount;
     }
 }
+

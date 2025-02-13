@@ -53,7 +53,7 @@ public class DiscountManager {
         return 1;
     }
 
-    public void applyFreeItemOffers(Map<Character, Integer> skuCountMap) {
+    public void dropFreeItemOffers(Map<Character, Integer> skuCountMap) {
         freeItemOffers.forEach(freeItemOffer -> freeItemOffer.apply(skuCountMap));
     }
 
@@ -66,14 +66,17 @@ public class DiscountManager {
                 if (valueWithDiscount.isPresent()) {
                     value += valueWithDiscount.get();
                     count = discount.getRemainingCount();
+                    continue;
                 }
             }
+            if (discount.isG)
         }
 
         value += count * unitPrice;
         return value;
     }
 }
+
 
 
 

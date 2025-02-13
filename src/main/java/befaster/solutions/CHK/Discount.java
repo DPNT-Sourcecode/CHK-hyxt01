@@ -29,9 +29,6 @@ public class Discount {
         Integer totalPrice = (discountCount * price) + (remainingCount * unitPrice);
         return Optional.of(totalPrice);
     }
-
-    public int getQuantity() {
-        return quantity;
-    }
 }
+
 

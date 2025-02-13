@@ -10,7 +10,7 @@ public class CheckoutSolution {
 
     private static final int INVALID_SKU = -1;
     private static final int EMPTY_CART = 0;
-    private static final String VALID_SKU_REGEX = "[A-F]*";
+    private static final String VALID_SKU_REGEX = "[A-Z]*";
 
     private final Map<String, Integer> skuPriceMap;
     private final DiscountManager discountManager;

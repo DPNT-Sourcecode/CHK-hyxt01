@@ -19,7 +19,7 @@ public class ProductsSet {
         this.products.put("H", 10);
         this.products.put("I", 35);
         this.products.put("J", 60);
-        this.products.put("K", 70);
+        this.products.put("K", 80);
         this.products.put("L", 90);
         this.products.put("M", 15);
         this.products.put("N", 40);

@@ -13,11 +13,21 @@ public class DiscountManager {
         discountList = List.of(
                 new Discount('A', 5, 200),
                 new Discount('A', 3, 130),
-                new Discount('B', 2, 45)
+                new Discount('B', 2, 45),
+                new Discount('H', 10, 80),
+                new Discount('H', 5, 45),
+                new Discount('K', 2, 150),
+                new Discount('P', 5, 200),
+                new Discount('Q', 3, 80),
+                new Discount('V', 3, 130),
+                new Discount('V', 2, 90)
         );
         freeItemOffers = List.of(
                 new BuyXGetYFreeOffer('E', 2, 'B'),
-                new BuyXGetYFreeOffer('F', 3, 'F')
+                new BuyXGetYFreeOffer('F', 3, 'F'),
+                new BuyXGetYFreeOffer('N', 3, 'M'),
+                new BuyXGetYFreeOffer('R', 3, 'Q'),
+                new BuyXGetYFreeOffer('U', 4, 'U')
         );
     }
 

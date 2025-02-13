@@ -72,4 +72,11 @@ class CheckoutSolutionTest {
         assertThat(checkoutSolution.checkout("FFFFFF"), equalTo(40));
         assertThat(checkoutSolution.checkout("FFFFFFF"), equalTo(50));
     }
+
+    @Test
+    public void testMoreDiscounts() {
+        assertThat(checkoutSolution.checkout("HHHHH"), equalTo(45));
+        assertThat(checkoutSolution.checkout("HHHHHHHHHH"), equalTo(80));
+        assertThat(checkoutSolution.checkout("KK"), equalTo(150));
+        assertThat(checkoutSolution.check
 }

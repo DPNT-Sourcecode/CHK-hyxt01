@@ -40,4 +40,9 @@ public class ProductCollection {
     public Map<String, Integer> getProducts() {
         return this.products;
     }
+    
+    public int getUnitPrice(Character sku) {
+        return this.products.get(String.valueOf(sku));
+    }
 }
+

@@ -5,30 +5,20 @@ import java.util.Optional;
 
 public class Discount {
 
-    private final List<Character> sku;
+    private final Character sku;
     private final int requiredQuantity;
     private final int price;
 
     private int remainingCount;
 
     public Discount(char sku, int quantity, int price) {
-        this.sku = List.of(sku);
+        this.sku = sku;
         this.requiredQuantity = quantity;
         this.price = price;
-    }
-
-    public Discount(List<Character> charList, int quantity, int price) {
-        this.sku = charList;
-        this.requiredQuantity = quantity;
-        this.price = price;
-    }
-
-    public List<Character> getSkuList() {
-        return sku;
     }
 
     public Boolean isApplicable(char sku) {
-        return this.sku.contains(sku);
+        return this.sku == sku;
     }
 
     public Optional<Integer> apply(int count) {
@@ -46,8 +36,5 @@ public class Discount {
     public int getRemainingCount() {
         return remainingCount;
     }
-
-    public int getRequiredQuantity() {
-        return requiredQuantity;
-    }
 }
+

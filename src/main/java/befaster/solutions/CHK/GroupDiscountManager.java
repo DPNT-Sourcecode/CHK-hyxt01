@@ -48,6 +48,12 @@ public class GroupDiscountManager {
             }
         }
     }
+
+    private void apply(Map<Character, Integer> skuCountMap) {
+        List<Character> skuInGroup = new ArrayList<>();
+        for (char item : groupDiscountList.get)
+    }
 }
+
 
 

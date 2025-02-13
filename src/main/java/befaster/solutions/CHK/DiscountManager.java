@@ -8,6 +8,7 @@ public class DiscountManager {
 
     private final List<Discount> discountList;
     private final List<BuyXGetYFreeOffer> freeItemOffers;
+    private final List<Discount> groupDiscountList;
 
     public DiscountManager() {
         discountList = List.of(
@@ -20,7 +21,9 @@ public class DiscountManager {
                 new Discount('P', 5, 200),
                 new Discount('Q', 3, 80),
                 new Discount('V', 3, 130),
-                new Discount('V', 2, 90),
+                new Discount('V', 2, 90)
+        );
+        groupDiscountList = List.of(
                 new Discount(List.of('S', 'T', 'X', 'Y', 'Z'), 3, 45)
         );
         freeItemOffers = List.of(
@@ -30,6 +33,11 @@ public class DiscountManager {
                 new BuyXGetYFreeOffer('R', 3, 'Q'),
                 new BuyXGetYFreeOffer('U', 4, 'U')
         );
+    }
+
+    public void applyGroupDiscounts(Map<Character, Integer> skuCountMap) {
+        
+        groupDiscountList.forEach(discount -> discount.apply(skuCountMap));
     }
 
     public void applyFreeItemOffers(Map<Character, Integer> skuCountMap) {
@@ -53,3 +61,4 @@ public class DiscountManager {
         return value;
     }
 }
+

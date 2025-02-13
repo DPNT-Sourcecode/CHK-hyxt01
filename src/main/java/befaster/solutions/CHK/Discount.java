@@ -6,20 +6,20 @@ import java.util.Optional;
 public class Discount {
 
     private final List<Character> sku;
-    private final int quantity;
+    private final int requiredQuantity;
     private final int price;
 
     private int remainingCount;
 
     public Discount(char sku, int quantity, int price) {
         this.sku = List.of(sku);
-        this.quantity = quantity;
+        this.requiredQuantity = quantity;
         this.price = price;
     }
 
     public Discount(List<Character> charList, int quantity, int price) {
         this.sku = charList;
-        this.quantity = quantity;
+        this.requiredQuantity = quantity;
         this.price = price;
     }
 
@@ -27,15 +27,13 @@ public class Discount {
         return this.sku.contains(sku);
     }
 
-    public Boolean isGroup
-
     public Optional<Integer> apply(int count) {
-        if (count < quantity) {
+        if (count < requiredQuantity) {
             return Optional.empty();
         }
 
-        int discountCount = count / quantity;
-        remainingCount = count % quantity;
+        int discountCount = count / requiredQuantity;
+        remainingCount = count % requiredQuantity;
 
         Integer totalPrice = (discountCount * price);
         return Optional.of(totalPrice);
@@ -44,5 +42,10 @@ public class Discount {
     public int getRemainingCount() {
         return remainingCount;
     }
+
+    public int getRequiredQuantity() {
+        return requiredQuantity;
+    }
 }
+
 

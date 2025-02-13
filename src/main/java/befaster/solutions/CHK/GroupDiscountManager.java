@@ -8,12 +8,18 @@ public class GroupDiscountManager {
             new Discount(List.of('S', 'T', 'X', 'Y', 'Z'), 3, 45)
     );
 
-    public boolean isApplicable(List<Character> list) {
-        boolean isApplicable = discountList.stream().anyMatch(discount -> discount.isApplicable(list));
-        discountList.forEach(discount -> {
-            if (discount.isApplicable(list)) {
-                discount.apply(list);
+    public int apply(List<Character> list) {
+        int value = 0;
+        for (Discount discount : discountList) {
+            int skuGroupCount = 0;
+            for (char sku : list) {
+                if (discount.isApplicable(sku)) {
+                    skuGroupCount++;
+                }
             }
-        });
+            value += discount.apply(skuGroupCount);
+        }
+        return value;
     }
 }
+

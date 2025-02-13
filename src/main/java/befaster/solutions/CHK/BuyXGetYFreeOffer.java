@@ -19,9 +19,10 @@ public class BuyXGetYFreeOffer {
         if (bought < requiredQuantity) return;
 
         int freeCount = bought / requiredQuantity;
-        int paidBCount = Math.max(0, itemCounts.getOrDefault(buySku, 0) - freeCount);
+        int paidBCount = Math.max(0, itemCounts.getOrDefault(freeSku, 0) - freeCount);
         itemCounts.put(freeSku, paidBCount);
     }
 }
+
 
 

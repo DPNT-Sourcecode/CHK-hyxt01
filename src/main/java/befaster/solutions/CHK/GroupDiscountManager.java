@@ -10,17 +10,16 @@ public class GroupDiscountManager {
             new Discount(List.of('S', 'T', 'X', 'Y', 'Z'), 3, 45)
     );
 
-    public int count = 0;
-    public Map<Character, Integer> nonApplicableSkus;
+    public Map<Character, Integer> skuCountMap;
     public int groupedDiscountValue = 0;
 
     public GroupDiscountManager(Map<Character, Integer> skuCountMap) {
-        nonApplicableSkus = skuCountMap;
+        this.skuCountMap = skuCountMap;
         applyGroupDiscounts(skuCountMap);
     }
 
     Map<Character, Integer> getNonApplicableSkus() {
-        return nonApplicableSkus;
+        return skuCountMap;
     }
 
     private void applyGroupDiscounts(Map<Character, Integer> skuCountMap) {
@@ -34,11 +33,12 @@ public class GroupDiscountManager {
             if (valueWithDiscount.isPresent()) {
                 groupedDiscountValue += valueWithDiscount.get();
                 for (char sku : groupDiscount.getSkuList()) {
-                    nonApplicableSkus.put(sku, skuCountMap.getOrDefault(sku, 0) - skuGroupCount);
+                    this.skuCountMap.put(sku, skuCountMap.getOrDefault(sku, 0) - 1);
                 }
             }
         }
     }
 }
+
 
 

@@ -69,13 +69,13 @@ public class DiscountManager {
                     continue;
                 }
             }
-            if (discount.isG)
         }
 
         value += count * unitPrice;
         return value;
     }
 }
+
 
 
 

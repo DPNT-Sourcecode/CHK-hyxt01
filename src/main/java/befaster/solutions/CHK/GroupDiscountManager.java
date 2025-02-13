@@ -46,14 +46,15 @@ public class GroupDiscountManager {
 //    }
 
     private void apply(Map<Character, Integer> skuCountMap) {
-        List<Character> itemsInGroup = getGroupItems(skuCountMap);
-        int total = 0;
-        while (itemsInGroup.size() >= groupDiscountItems.getRequiredQuantity()) {
-            total += 45;
-            itemsInGroup.subList(0, 3).clear();
-        }
-        for (char item : itemsInGroup) {
-            total += prices.get(item);
+        List<Character> skuInGroup = getGroupItems(skuCountMap);
+        int skuGroupCount = skuInGroup.size();
+        Optional<Integer> valueWithDiscount = groupDiscountItems.apply(skuGroupCount);
+        if (valueWithDiscount.isPresent()) {
+            groupedDiscountValue += valueWithDiscount.get();
+            for (char sku : skuInGroup) {
+                int remainingCount = skuCountMap.getOrDefault(sku, 0) - 1;
+                if (remainingCount >= 0) this.nonApplicableSkus.put(sku, remainingCount);
+            }
         }
     }
 
@@ -67,8 +68,3 @@ public class GroupDiscountManager {
         return skuInGroup;
     }
 }
-
-
-
-
-

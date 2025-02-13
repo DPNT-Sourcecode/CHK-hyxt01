@@ -20,7 +20,8 @@ public class DiscountManager {
                 new Discount('P', 5, 200),
                 new Discount('Q', 3, 80),
                 new Discount('V', 3, 130),
-                new Discount('V', 2, 90)
+                new Discount('V', 2, 90),
+                new Discount(List.of('S', 'T', 'X', 'Y', 'Z'), 3, 45)
         );
         freeItemOffers = List.of(
                 new BuyXGetYFreeOffer('E', 2, 'B'),

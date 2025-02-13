@@ -41,4 +41,3 @@ public class ProductsSet {
         return this.products;
     }
 }
-

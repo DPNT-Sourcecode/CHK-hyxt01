@@ -55,4 +55,3 @@ public class CheckoutSolution {
         return discountManager.calculateValueWithDiscount(sku, count, unitPrice);
     }
 }
-

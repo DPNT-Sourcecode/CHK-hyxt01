@@ -30,4 +30,7 @@ public class Discount {
         return Optional.of(totalPrice);
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
 }

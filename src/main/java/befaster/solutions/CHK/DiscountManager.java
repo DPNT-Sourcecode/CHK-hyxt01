@@ -44,12 +44,13 @@ public class DiscountManager {
                 }
             }
 
-            Optional<Integer> valueWithDiscount = groupDiscount.apply(skuGroupCount);
-            if (valueWithDiscount.isPresent()) {
-                value += valueWithDiscount.get();
-                count = discount.getRemainingCount();
-            }
+//            Optional<Integer> valueWithDiscount = groupDiscount.apply(skuGroupCount);
+//            if (valueWithDiscount.isPresent()) {
+//                value += valueWithDiscount.get();
+//                count = discount.getRemainingCount();
+//            }
         });
+        return 1;
     }
 
     public void applyFreeItemOffers(Map<Character, Integer> skuCountMap) {
@@ -73,5 +74,6 @@ public class DiscountManager {
         return value;
     }
 }
+
 
 

@@ -65,6 +65,7 @@ public class CheckoutSolution {
         String skuStr = String.valueOf(sku);
         int unitPrice = skuPriceMap.get(skuStr);
 
+        int total = applyDiscounts(sku, count, unitPrice);
         for (Discount discount : discountList) {
             if (discount.isApplicable(sku)) {
                 Optional<Integer> valueWithDiscount = discount.apply(count, unitPrice);

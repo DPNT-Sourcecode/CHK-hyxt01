@@ -7,7 +7,7 @@ import java.util.Optional;
 public class DiscountManager {
 
     private final List<Discount> discountList;
-    private final BuyXGetYFreeOffer freeBWithE;
+    private final List<BuyXGetYFreeOffer> freeItemOffers;
 
     public DiscountManager() {
         discountList = List.of(
@@ -15,11 +15,14 @@ public class DiscountManager {
                 new Discount('A', 3, 130),
                 new Discount('B', 2, 45)
         );
-        freeBWithE = new BuyXGetYFreeOffer('E', 2, 'B');
+        freeItemOffers = List.of(
+                new BuyXGetYFreeOffer('E', 2, 'B'),
+                new BuyXGetYFreeOffer('F', 2, 'F')
+        );
     }
 
     public void applyFreeItemOffers(Map<Character, Integer> skuCountMap) {
-        freeBWithE.apply(skuCountMap);
+        freeItemOffers.forEach(freeItemOffer -> freeItemOffer.apply(skuCountMap));
     }
 
     public int calculateValueWithDiscount(char sku, int count, int unitPrice) {
@@ -39,4 +42,3 @@ public class DiscountManager {
         return value;
     }
 }
-

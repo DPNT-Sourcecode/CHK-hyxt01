@@ -21,7 +21,8 @@ public class CheckoutSolution {
             "B", 30,
             "C", 20,
             "D", 15,
-            "E", 40
+            "E", 40,
+            "F", 10
         );
         discountManager = new DiscountManager();
     }
@@ -61,5 +62,3 @@ public class CheckoutSolution {
         return discountManager.calculateValueWithDiscount(sku, count, unitPrice);
     }
 }
-
-

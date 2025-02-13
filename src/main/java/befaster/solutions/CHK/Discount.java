@@ -36,6 +36,3 @@ public class Discount {
         return remainingCount;
     }
 }
-
-
-

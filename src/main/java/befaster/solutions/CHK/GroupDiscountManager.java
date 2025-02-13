@@ -28,8 +28,13 @@ public class GroupDiscountManager {
             List<Character> skuInGroup = new ArrayList<>();
             int skuGroupCount = 0;
             for (char sku : groupDiscount.getSkuList()) {
-                skuGroupCount += skuCountMap.getOrDefault(sku, 0);
-                skuInGroup.add(sku);
+                int skuItemGroup = skuCountMap.getOrDefault(sku, 0);
+                if (skuItemGroup == 0) continue;
+
+                skuGroupCount += skuItemGroup;
+                for (int i = 0; i < skuItemGroup; i++) {
+                    skuInGroup.add(sku);
+                }
             }
 
             Optional<Integer> valueWithDiscount = groupDiscount.apply(skuGroupCount);
@@ -44,4 +49,5 @@ public class GroupDiscountManager {
         }
     }
 }
+
 

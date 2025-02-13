@@ -13,7 +13,7 @@ public class CheckoutSolution {
     private final DiscountManager discountManager;
 
     public CheckoutSolution() {
-        skuPriceMap = new ProductsSet().getProducts();
+        skuPriceMap = new ProductCollection().getProducts();
         discountManager = new DiscountManager();
     }
 
@@ -52,3 +52,4 @@ public class CheckoutSolution {
         return discountManager.calculateValueWithDiscount(sku, count, unitPrice);
     }
 }
+

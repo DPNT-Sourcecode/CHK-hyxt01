@@ -1,6 +1,7 @@
 package befaster.solutions.CHK;
 
 import java.util.List;
+import java.util.Optional;
 
 public class GroupDiscountManager {
 
@@ -9,7 +10,6 @@ public class GroupDiscountManager {
     );
 
     public int apply(List<Character> list) {
-        int value = 0;
         for (Discount discount : discountList) {
             int skuGroupCount = 0;
             for (char sku : list) {
@@ -17,9 +17,13 @@ public class GroupDiscountManager {
                     skuGroupCount++;
                 }
             }
-            value += discount.apply(skuGroupCount);
+            Optional<Integer> valueWithDiscount = discount.apply(skuGroupCount);
+            if (valueWithDiscount.isPresent()) {
+                return valueWithDiscount.get();
+            }
         }
-        return value;
+        return -1;
     }
 }
+
 

@@ -3,11 +3,11 @@ package befaster.solutions.CHK;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductsSet {
+public class ProductCollection {
 
     private Map<String, Integer> products;
 
-    public ProductsSet() {
+    public ProductCollection() {
         this.products = new HashMap<>();
         this.products.put("A", 50);
         this.products.put("B", 30);

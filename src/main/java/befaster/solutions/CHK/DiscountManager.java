@@ -16,7 +16,7 @@ public class DiscountManager {
                 new Discount('B', 2, 45),
                 new Discount('H', 10, 80),
                 new Discount('H', 5, 45),
-                new Discount('K', 2, 150),
+                new Discount('K', 2, 120),
                 new Discount('P', 5, 200),
                 new Discount('Q', 3, 80),
                 new Discount('V', 3, 130),
@@ -52,3 +52,4 @@ public class DiscountManager {
         return value;
     }
 }
+

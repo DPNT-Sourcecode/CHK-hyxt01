@@ -35,5 +35,3 @@ public class Discount {
         return discountCount;
     }
 }
-
-

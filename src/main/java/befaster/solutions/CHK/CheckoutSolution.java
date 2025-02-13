@@ -2,6 +2,7 @@ package befaster.solutions.CHK;
 
 import javax.swing.text.html.Option;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -12,7 +13,7 @@ public class CheckoutSolution {
     private static final String VALID_SKU_REGEX = "[A-D]*";
 
     private final Map<String, Integer> skuPriceMap;
-    private final Map<String, Discount> skuDiscountMap;
+    private final List<Discount> skuDiscountMap;
 
     public CheckoutSolution() {
         skuPriceMap = Map.of(
@@ -24,6 +25,7 @@ public class CheckoutSolution {
 
         skuDiscountMap = Map.of(
             "A", new Discount(3, 130),
+                "A", new Discount(5, 200),
             "B", new Discount(2, 45)
         );
     }
@@ -66,27 +68,5 @@ public class CheckoutSolution {
             }
         }
         return count * price;
-    }
-
-    private class Discount {
-        private final int quantity;
-        private final int price;
-
-        public Discount(int quantity, int price) {
-            this.quantity = quantity;
-            this.price = price;
-        }
-
-        public Optional<Integer> apply(int count, int unitPrice) {
-            if (count < quantity) {
-                return Optional.empty();
-            }
-
-            int discountCount = count / quantity;
-            int remainingCount = count % quantity;
-
-            Integer totalPrice = (discountCount * price) + (remainingCount * unitPrice);
-            return Optional.of(totalPrice);
-        }
     }
 }

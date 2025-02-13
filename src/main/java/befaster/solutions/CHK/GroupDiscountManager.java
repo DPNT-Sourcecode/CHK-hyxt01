@@ -32,14 +32,16 @@ public class GroupDiscountManager {
             Optional<Integer> valueWithDiscount = groupDiscount.apply(skuGroupCount);
             if (valueWithDiscount.isPresent()) {
                 groupedDiscountValue += valueWithDiscount.get();
+
                 for (char sku : groupDiscount.getSkuList()) {
-                    int remainingCount =  skuCountMap.getOrDefault(sku, 0) - 1;
+                    int remainingCount = skuCountMap.getOrDefault(sku, 0) - 1;
                     if (remainingCount >= 0) this.nonApplicableSkus.put(sku, remainingCount);
                 }
             }
         }
     }
 }
+
 
 
 

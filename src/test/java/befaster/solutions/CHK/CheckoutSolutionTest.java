@@ -48,6 +48,6 @@ class CheckoutSolutionTest {
     public void testFreeBWithE() {
         assertThat(checkoutSolution.checkout("EEB"), equalTo(80));
         assertThat(checkoutSolution.checkout("EEEB"), equalTo(120));
-        assertThat(checkoutSolution.checkout("EEEBB"), equalTo(125));
+        assertThat(checkoutSolution.checkout("EEEBB"), equalTo(150));
     }
 }

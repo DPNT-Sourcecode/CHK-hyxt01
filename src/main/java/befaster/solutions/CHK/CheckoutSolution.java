@@ -10,7 +10,7 @@ public class CheckoutSolution {
 
     private static final int INVALID_SKU = -1;
     private static final int EMPTY_CART = 0;
-    private static final String VALID_SKU_REGEX = "[A-D]*";
+    private static final String VALID_SKU_REGEX = "[A-E]*";
 
     private final Map<String, Integer> skuPriceMap;
     private final List<Discount> discountList;
@@ -21,7 +21,8 @@ public class CheckoutSolution {
             "A", 50,
             "B", 30,
             "C", 20,
-            "D", 15
+            "D", 15,
+            "E", 40
         );
 
         discountList = List.of(
@@ -80,5 +81,6 @@ public class CheckoutSolution {
         return count * price;
     }
 }
+
 
 

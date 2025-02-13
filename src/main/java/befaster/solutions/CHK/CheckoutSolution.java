@@ -1,7 +1,9 @@
 package befaster.solutions.CHK;
 
+import javax.swing.text.html.Option;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class CheckoutSolution {
 
@@ -52,7 +54,7 @@ public class CheckoutSolution {
 
         Discount discount = skuDiscountMap.get(skuStr);
         if (discount != null) {
-            return discount.apply(count);
+            return discount.apply(count).ifPresent(value -> value).orElse(count * price);
         }
         return count * price;
     }
@@ -66,11 +68,16 @@ public class CheckoutSolution {
             this.price = price;
         }
 
-        public int apply(int count) {
+        public Optional<Integer> apply(int count) {
+            if (count < quantity) {
+                return Optional.empty();
+            }
+
             int discountCount = count / quantity;
             int remainingCount = count % quantity;
 
-            return discountCount * price + remainingCount * price;
+            Integer value = discountCount * price + remainingCount * price;
+            return Optional.of(value);
         }
     }
 }

@@ -8,8 +8,6 @@ public class Discount {
     private final int quantity;
     private final int price;
 
-    private int discountCount;
-
     public Discount(char sku, int quantity, int price) {
         this.sku = sku;
         this.quantity = quantity;
@@ -25,13 +23,15 @@ public class Discount {
             return Optional.empty();
         }
 
-        discountCount = count / quantity;
+        int discountCount = count / quantity;
+        int remainingCount = count % quantity;
 
-        Integer totalPrice = (discountCount * price);
+        Integer totalPrice = (discountCount * price) + (remainingCount * unitPrice);
         return Optional.of(totalPrice);
     }
 
-    public int getDiscountCount() {
-        return discountCount;
+    public int getQuantity() {
+        return quantity;
     }
 }
+

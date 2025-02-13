@@ -71,8 +71,8 @@ public class CheckoutSolution {
             if (discount.isApplicable(sku)) {
                 Optional<Integer> valueWithDiscount = discount.apply(count, unitPrice);
                 if (valueWithDiscount.isPresent()) {
-                    value += valueWithDiscount.get();
-                    count = count - discount.getDiscountCount();
+                    value = valueWithDiscount.get();
+                    count -= discount.getQuantity();
                 }
             }
         }
@@ -80,6 +80,6 @@ public class CheckoutSolution {
         if (count > 0) {
             value += count * unitPrice;
         }
-        return value;
+        return count * unitPrice;
     }
 }

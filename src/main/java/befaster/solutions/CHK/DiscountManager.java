@@ -39,6 +39,25 @@ public class DiscountManager {
         freeItemOffers.forEach(freeItemOffer -> freeItemOffer.apply(skuCountMap));
     }
 
+    public int applyGroupDiscounts(Map<Character, Integer> skuCountMap) {
+        int value = 0;
+        for (Discount groupDiscount : groupDiscountList) {
+            int skuGroupCount = 0;
+            for (char sku : groupDiscount.getSkuList()) {
+                skuGroupCount += skuCountMap.getOrDefault(sku, 0);
+            }
+            Optional<Integer> valueWithDiscount = groupDiscount.apply(skuGroupCount);
+            if (valueWithDiscount.isPresent()) {
+                value += valueWithDiscount.get();
+                skuGroupCount = groupDiscount.getRemainingCount();
+                for (char sku : groupDiscount.getSkuList()) {
+                    skuCountMap.put(sku, skuCountMap.getOrDefault(sku, 0) - skuGroupCount);
+                }
+            }
+        }
+        return value;
+    }
+
     public int calculateValueWithDiscount(char sku, int count, int unitPrice) {
         int value = 0;
 
@@ -57,3 +76,4 @@ public class DiscountManager {
         return value;
     }
 }
+

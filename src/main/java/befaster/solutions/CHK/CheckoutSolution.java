@@ -38,6 +38,7 @@ public class CheckoutSolution {
         discountManager.dropFreeItemOffers(skuCountMap);
 
         int total = 0;
+        total += discountManager.applyGroupDiscounts(skuCountMap);
         for (Map.Entry<Character, Integer> entry : skuCountMap.entrySet()) {
             char sku = entry.getKey();
             int count = entry.getValue();
@@ -54,3 +55,4 @@ public class CheckoutSolution {
         return discountManager.calculateValueWithDiscount(sku, count, unitPrice);
     }
 }
+

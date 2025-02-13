@@ -23,6 +23,10 @@ public class Discount {
         this.price = price;
     }
 
+    public List<Character> getSkuList() {
+        return sku;
+    }
+
     public Boolean isApplicable(char sku) {
         return this.sku.contains(sku);
     }
@@ -47,3 +51,4 @@ public class Discount {
         return requiredQuantity;
     }
 }
+

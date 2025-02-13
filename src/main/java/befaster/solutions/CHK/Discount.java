@@ -24,9 +24,8 @@ public class Discount {
         }
 
         int discountCount = count / quantity;
-        int remainingCount = count % quantity;
 
-        Integer totalPrice = (discountCount * price) + (remainingCount * unitPrice);
+        Integer totalPrice = (discountCount * price);
         return Optional.of(totalPrice);
     }
 
@@ -34,3 +33,4 @@ public class Discount {
         return quantity;
     }
 }
+

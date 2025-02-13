@@ -8,7 +8,6 @@ public class DiscountManager {
 
     private final List<Discount> discountList;
     private final List<BuyXGetYFreeOffer> freeItemOffers;
-    private final List<Discount> groupDiscountList;
 
     public DiscountManager() {
         discountList = List.of(
@@ -23,9 +22,6 @@ public class DiscountManager {
                 new Discount('V', 3, 130),
                 new Discount('V', 2, 90)
         );
-        groupDiscountList = List.of(
-                new Discount(List.of('S', 'T', 'X', 'Y', 'Z'), 3, 45)
-        );
         freeItemOffers = List.of(
                 new BuyXGetYFreeOffer('E', 2, 'B'),
                 new BuyXGetYFreeOffer('F', 3, 'F'),
@@ -39,24 +35,6 @@ public class DiscountManager {
         freeItemOffers.forEach(freeItemOffer -> freeItemOffer.apply(skuCountMap));
     }
 
-    public int applyGroupDiscounts(Map<Character, Integer> skuCountMap) {
-        int value = 0;
-        for (Discount groupDiscount : groupDiscountList) {
-            int skuGroupCount = 0;
-            for (char sku : groupDiscount.getSkuList()) {
-                skuGroupCount += skuCountMap.getOrDefault(sku, 0);
-            }
-            Optional<Integer> valueWithDiscount = groupDiscount.apply(skuGroupCount);
-            if (valueWithDiscount.isPresent()) {
-                value += valueWithDiscount.get();
-                for (char sku : groupDiscount.getSkuList()) {
-                    skuCountMap.put(sku, skuCountMap.getOrDefault(sku, 0) - skuGroupCount);
-                }
-            }
-        }
-        return value;
-    }
-
     public int calculateValueWithDiscount(char sku, int count, int unitPrice) {
         int value = 0;
 
@@ -66,7 +44,6 @@ public class DiscountManager {
                 if (valueWithDiscount.isPresent()) {
                     value += valueWithDiscount.get();
                     count = discount.getRemainingCount();
-                    continue;
                 }
             }
         }
@@ -75,3 +52,4 @@ public class DiscountManager {
         return value;
     }
 }
+

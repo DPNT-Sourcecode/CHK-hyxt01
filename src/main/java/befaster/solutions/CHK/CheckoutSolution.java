@@ -69,7 +69,7 @@ public class CheckoutSolution {
                 .filter(
                         discount ->
                         discount.isApplicable(sku)
-                ).findFirst();
+                );
 
 
         if (applicableDiscount.isPresent()) {

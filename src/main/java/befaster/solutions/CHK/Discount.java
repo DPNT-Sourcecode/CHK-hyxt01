@@ -1,6 +1,5 @@
 package befaster.solutions.CHK;
 
-import java.util.List;
 import java.util.Optional;
 
 public class Discount {
@@ -37,4 +36,5 @@ public class Discount {
         return remainingCount;
     }
 }
+
 

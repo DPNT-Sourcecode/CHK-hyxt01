@@ -35,9 +35,21 @@ public class DiscountManager {
         );
     }
 
-    public void applyGroupDiscounts(Map<Character, Integer> skuCountMap) {
-        
-        groupDiscountList.forEach(discount -> discount.apply(skuCountMap));
+    public int applyGroupDiscounts(Map<Character, Integer> skuCountMap) {
+        groupDiscountList.forEach(groupDiscount -> {
+            int skuGroupCount = 0;
+            for (char sku : skuCountMap.keySet()) {
+                if (groupDiscount.isApplicable(sku)) {
+                    skuGroupCount++;
+                }
+            }
+
+            Optional<Integer> valueWithDiscount = groupDiscount.apply(skuGroupCount);
+            if (valueWithDiscount.isPresent()) {
+                value += valueWithDiscount.get();
+                count = discount.getRemainingCount();
+            }
+        });
     }
 
     public void applyFreeItemOffers(Map<Character, Integer> skuCountMap) {
@@ -61,4 +73,5 @@ public class DiscountManager {
         return value;
     }
 }
+
 

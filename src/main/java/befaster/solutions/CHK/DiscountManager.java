@@ -17,7 +17,7 @@ public class DiscountManager {
         );
         freeItemOffers = List.of(
                 new BuyXGetYFreeOffer('E', 2, 'B'),
-                new BuyXGetYFreeOffer('F', 2, 'F')
+                new BuyXGetYFreeOffer('F', 3, 'F')
         );
     }
 

@@ -4,7 +4,9 @@ import java.util.*;
 
 public class GroupDiscountManager {
 
-    private static final Discount groupDiscountItems = new Discount(List.of('S', 'T', 'X', 'Y', 'Z'), 3, 45);
+    private static final Set<Character> GROUP_DISCOUNT_ITEMS = Set.of('S', 'T', 'X', 'Y', 'Z');
+    private static final int REQUIRED_QUANTITY = 3;
+    private static final int PRICE = 45;
 
 
     public Map<Character, Integer> nonApplicableSkus;
@@ -45,30 +47,26 @@ public class GroupDiscountManager {
 
     private void apply(Map<Character, Integer> skuCountMap) {
         List<Character> itemsInGroup = new ArrayList<>();
-        for (char item : groupDiscountItems.getSkuList()) {
+        for (char item : GROUP_DISCOUNT_ITEMS) {
             for (int i = 0; i < skuCountMap.getOrDefault(item, 0); i++) {
                 itemsInGroup.add(item);
             }
         }
 
-        while (itemsInGroup.size() >= groupDiscountItems.getRequiredQuantity()) {
-            groupedDiscountValue += 45;
-            itemsInGroup.subList(0, 3).forEach(item -> {
+        while (itemsInGroup.size() >= REQUIRED_QUANTITY) {
+            groupedDiscountValue += PRICE;
+            itemsInGroup.subList(0, REQUIRED_QUANTITY).forEach(item -> {
                 int remainingCount = skuCountMap.getOrDefault(item, 0) - 1;
                 if (remainingCount > 0) this.nonApplicableSkus.put(item, remainingCount);
                 if (remainingCount == 0) this.nonApplicableSkus.remove(item);
             });
-            itemsInGroup.subList(0, 3).clear();
+            itemsInGroup.subList(0, REQUIRED_QUANTITY).clear();
         }
-//        for (char item : itemsInGroup) {
-//            int remainingCount = skuCountMap.getOrDefault(item, 0) + 1;
-//            if (remainingCount >= 0) this.nonApplicableSkus.put(item, remainingCount);
-//        }
     }
 
     private List<Character> getGroupItems(Map<Character, Integer> skuCountMap) {
         List<Character> skuInGroup = new ArrayList<>();
-        for (char item : groupDiscountItems.getSkuList()) {
+        for (char item : GROUP_DISCOUNT_ITEMS) {
             for (int i = 0; i < skuCountMap.getOrDefault(item, 0); i++) {
                 skuInGroup.add(item);
             }
@@ -76,6 +74,7 @@ public class GroupDiscountManager {
         return skuInGroup;
     }
 }
+
 
 
 

@@ -11,19 +11,19 @@ public class GroupDiscountManager {
     );
 
     public int count = 0;
-    public Map<Character, Integer> remaining;
-    public int checkoutValue;
+    public Map<Character, Integer> nonApplicableSkus;
+    public int groupedDiscountValue = 0;
 
     public GroupDiscountManager(Map<Character, Integer> skuCountMap) {
+        nonApplicableSkus = skuCountMap;
         applyGroupDiscounts(skuCountMap);
     }
 
-    public List<Character> getNonApplicableSkus() {
-        return remaining;
+    Map<Character, Integer> getNonApplicableSkus() {
+        return nonApplicableSkus;
     }
 
     private void applyGroupDiscounts(Map<Character, Integer> skuCountMap) {
-        int value = 0;
         for (Discount groupDiscount : groupDiscountList) {
             int skuGroupCount = 0;
             for (char sku : groupDiscount.getSkuList()) {
@@ -32,13 +32,13 @@ public class GroupDiscountManager {
 
             Optional<Integer> valueWithDiscount = groupDiscount.apply(skuGroupCount);
             if (valueWithDiscount.isPresent()) {
-                value += valueWithDiscount.get();
+                groupedDiscountValue += valueWithDiscount.get();
                 for (char sku : groupDiscount.getSkuList()) {
-                    remaining.put(sku, skuCountMap.getOrDefault(sku, 0) - skuGroupCount);
+                    nonApplicableSkus.put(sku, skuCountMap.getOrDefault(sku, 0) - skuGroupCount);
                 }
             }
         }
-        return value;
     }
 }
+
 

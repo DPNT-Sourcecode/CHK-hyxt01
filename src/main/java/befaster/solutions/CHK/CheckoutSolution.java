@@ -35,10 +35,11 @@ public class CheckoutSolution {
 
         discountManager.dropFreeItemOffers(skuCountMap);
 
-        int total = 0;
-        total += discountManager.applyGroupDiscounts(skuCountMap);
+        GroupDiscountManager groupDiscountManager = new GroupDiscountManager(skuCountMap);
 
-        for (Map.Entry<Character, Integer> entry : skuCountMap.entrySet()) {
+        int total = groupDiscountManager.groupedDiscountValue;
+
+        for (Map.Entry<Character, Integer> entry : groupDiscountManager.getNonApplicableSkus().entrySet()) {
             char sku = entry.getKey();
             int count = entry.getValue();
 
